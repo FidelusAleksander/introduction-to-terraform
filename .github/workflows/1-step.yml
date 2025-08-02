@@ -2,12 +2,9 @@ name: Step 1
 
 on:
   workflow_dispatch:
-  # Common event triggers: pull_request, push, issues, issue_comment (feel free to experiment)
-  # Docs: https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows
-  # Example:
-  # pull_request:
-  #   branches:
-  #     - main
+  label:
+    types:
+      - created
 
 permissions:
   contents: read
