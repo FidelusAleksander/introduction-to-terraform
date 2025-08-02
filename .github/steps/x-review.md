@@ -1,16 +1,19 @@
 ## Review
 
-_Congratulations, you've completed this exercise and learned a lot about (replace-me: feature/product that was taught in this exercise)
+_Congratulations, you've completed this exercise and learned a lot about Infrastructure as Code with Terraform!_
 
 <img src="https://octodex.github.com/images/jetpacktocat.png" alt="celebrate" width=200 align=right>
 
 Here's a recap of your accomplishments:
 
-- (replace-me: Accomplishment #1)
-- (replace-me: Accomplishment #N)
+- Understanding the Terraform workflow: init, plan, apply
+- Adding new resources to expand infrastructure management
+- Recognizing and handling existing resource conflicts
+- Importing existing resources into Terraform management
+- Managing GitHub repository settings as code
 
 ### What's next?
 
-- (replace-me: Natural follow up Skills exercise - if there is one)
-- (replace-me: Documentation link to learn more about the feature)
-- (replace-me: Other resources or calls to action)
+- [Terraform Learning Hub](https://learn.hashicorp.com/terraform) - Continue your Terraform journey with advanced topics
+- [GitHub Provider Documentation](https://registry.terraform.io/providers/integrations/github/latest/docs) - Explore more GitHub resources you can manage
+- [GitHub Skills](https://skills.github.com) - Learn more developer skills
