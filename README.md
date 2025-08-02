@@ -28,7 +28,7 @@ Simply copy the exercise to your account, then give your favorite Octocat (Mona)
 
 <!--  (replace-me: Make sure to edit the URL with proper template_owner, template_name, repo name and description)  -->
 
-[![](https://img.shields.io/badge/Copy%20Exercise-%E2%86%92-1f883d?style=for-the-badge&logo=github&labelColor=197935)](https://github.com/new?template_owner=skills&template_name=introduction-to-terraform&owner=%40me&name=skills-introduction-to-terraform&description=Exercise:+Introduction+to+Terraform&visibility=public)
+[![](https://img.shields.io/badge/Copy%20Exercise-%E2%86%92-1f883d?style=for-the-badge&logo=github&labelColor=197935)](https://github.com/new?template_owner=FidelusAleksander&template_name=introduction-to-terraform&owner=%40me&name=introduction-to-terraform-exercise&description=Exercise:+Introduction+to+Terraform&visibility=public)
 
 <details>
 <summary>Having trouble? 🤷</summary><br/>
