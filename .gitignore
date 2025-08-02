@@ -26,6 +26,12 @@
 *.sql
 *.sqlite
 
+# Terraform files #
+####################
+*.tfstate
+*.tfstate.*
+.terraform/
+
 # OS generated files #
 ######################
 .DS_Store
