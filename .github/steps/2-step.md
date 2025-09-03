@@ -16,23 +16,25 @@ Learn more about [GitHub branch protection](https://docs.github.com/en/repositor
 ### ⌨️ Activity: Add Branch Protection Configuration
 
 1. Add a `github_branch_protection` resource to your `main.tf` file
+
+  ```hcl
+  resource "github_branch_protection" "protect_main" {
+    repository_id = data.github_repository.this.node_id
+    pattern       = "main"
+
+    required_pull_request_reviews {
+      required_approving_review_count = 1
+    }
+  }
+  ```
+
 1. Configure protection for the main branch with required pull requests
 1. Run `terraform plan` to see the new resource that will be created
-1. Run `terraform apply` to create the branch protection rule
+1. Run `terraform apply`. Notice the permission error.
+1. Run this command 
 1. Verify the protection rule appears in your repository settings
 
-Use this configuration for the branch protection:
 
-```hcl
-resource "github_branch_protection" "main" {
-  repository_id = var.repository_name
-  pattern       = "main"
-
-  required_pull_request_reviews {
-    required_approving_review_count = 1
-  }
-}
-```
 
 <details>
 <summary>Having trouble? 🤷</summary><br/>
