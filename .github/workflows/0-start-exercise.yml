@@ -25,6 +25,8 @@ jobs:
       - name: Parse Issue
         id: parser
         uses: issue-ops/parser@v4
+        with:
+          issue-form-template: exercise-setup.yml
 
       - name: Output Issue JSON
         run: echo ${{ steps.parser.outputs.json }}
@@ -128,3 +130,5 @@ jobs:
 
       - name: Close configuration issue
         run: gh issue close ${{ github.event.issue.number }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
