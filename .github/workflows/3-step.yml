@@ -47,9 +47,6 @@ jobs:
           issue-number: ${{ env.ISSUE_NUMBER }}
           github-repository: ${{ env.ISSUE_REPOSITORY }}
 
-      - name: echo labels
-        run: echo "${{ steps.extract-state.outputs.state }}"
-
       - name: Create comment - step finished
         uses: GrantBirki/comment@v2.1.1
         with:
