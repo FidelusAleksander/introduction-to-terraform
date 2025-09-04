@@ -39,6 +39,17 @@ jobs:
           path: exercise-toolkit
           ref: v0.7.0
 
+      # Extract state labels from the issue
+      - name: Extract state labels
+        id: extract-state
+        uses: ./.github/actions/extract-state-labels
+        with:
+          issue-number: ${{ env.ISSUE_NUMBER }}
+          github-repository: ${{ env.ISSUE_REPOSITORY }}
+
+      - name: echo labels
+        run: echo "${{ steps.extract-state.outputs.state }}"
+
       - name: Create comment - step finished
         uses: GrantBirki/comment@v2.1.1
         with:
@@ -54,6 +65,8 @@ jobs:
           repository: ${{ env.ISSUE_REPOSITORY }}
           issue-number: ${{ env.ISSUE_NUMBER }}
           file: ${{ env.STEP_4_FILE }}
+          vars: |
+            tf_tool: ${{ fromJson(steps.extract-state.outputs.state).tf_tool }}
 
       - name: Create comment - watching for progress
         uses: GrantBirki/comment@v2.1.1
