@@ -89,6 +89,13 @@ jobs:
           path: exercise-toolkit
           ref: v0.7.0
 
+      - name: Extract state labels
+        id: extract-state
+        uses: ./.github/actions/extract-state-labels
+        with:
+          issue-number: ${{ env.ISSUE_NUMBER }}
+          github-repository: ${{ env.ISSUE_REPOSITORY }}
+            
       - name: Create comment - add step content
         uses: GrantBirki/comment@v2.1.1
         with:
@@ -98,6 +105,8 @@ jobs:
           vars: |
             login: ${{ github.actor }}
             full_repo_name: ${{ github.repository }}
+            tf_tool: ${{ fromJson(steps.extract-state.outputs.state).tf_tool }}
+
 
       - name: Create comment - watching for progress
         uses: GrantBirki/comment@v2.1.1
