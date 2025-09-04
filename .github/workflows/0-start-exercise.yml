@@ -22,15 +22,27 @@ jobs:
       configuration: ${{ steps.parser.outputs.json }}
 
     steps:
+      - uses: actions/checkout@v5
       - name: Parse Issue
         id: parser
         uses: issue-ops/parser@v4
         with:
           issue-form-template: exercise-setup.yml
 
-      - name: Output Issue JSON
+      - name: Echo json output
         run: echo ${{ steps.parser.outputs.json }}
 
+      - name: Echo all outputs 
+        run: echo ${{ steps.parser.outputs }}
+
+      - name: Mention the issue is being prepared
+        uses: GrantBirki/comment@v2.1.1
+        with:
+          repository: ${{ github.repository }}
+          issue-number: ${{ github.event.issue.number }}
+          body: |
+            Hi @${{ github.actor }}! We're preparing your environment and will notify you here once it's ready.
+            
   start_exercise:
     if: |
       !github.event.repository.is_template
@@ -54,9 +66,9 @@ jobs:
           action: add
           issue_number: ${{ needs.start_exercise.outputs.issue-number }}
           labels: |
-            state::tf_tool::${{ fromJson(needs.check_issue.outputs.configuration).tf_tool }}
-            state::difficulty::${{ fromJson(needs.check_issue.outputs.configuration).difficulty }}
-            state::language::${{ fromJson(needs.check_issue.outputs.configuration).language }}
+            state::tf_tool::${{ fromJson(needs.check_issue.outputs.configuration).tf_tool[0] }}
+            state::difficulty::${{ fromJson(needs.check_issue.outputs.configuration).difficulty[0] }}
+            state::language::${{ fromJson(needs.check_issue.outputs.configuration).language[0] }}
 
   post_next_step_content:
     name: Post next step content
@@ -129,6 +141,6 @@ jobs:
 
 
       - name: Close configuration issue
-        run: gh issue close ${{ github.event.issue.number }}
+        run: gh issue close ${{ github.event.issue.number }} --repo ${{ env.ISSUE_REPOSITORY }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
