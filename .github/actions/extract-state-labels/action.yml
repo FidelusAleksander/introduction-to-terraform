@@ -1,0 +1,78 @@
+name: "Extract State Labels"
+description: "Extract labels with state:: prefix and convert to JSON"
+inputs:
+  issue-number:
+    description: "Issue number to extract labels from"
+    required: true
+  github-repository:
+    description: "GitHub repository in owner/repo format"
+    required: false
+    default: "${{ github.repository }}"
+  github-token:
+    description: "GitHub token"
+    required: false
+    default: "${{ github.token }}"
+outputs:
+  state:
+    description: "JSON string of extracted state data for use with fromJson()"
+    value: ${{ steps.extract.outputs.state }}
+runs:
+  using: "composite"
+  steps:
+    - name: Extract State Labels
+      id: extract
+      uses: actions/github-script@v7
+      with:
+        github-token: ${{ inputs.github-token }}
+        script: |
+          // Parse repository input
+          const [owner, repo] = '${{ inputs.github-repository }}'.split('/');
+          const issueNumber = '${{ inputs.issue-number }}';
+
+          // Get issue details
+          const { data: issue } = await github.rest.issues.get({
+            owner: owner,
+            repo: repo,
+            issue_number: issueNumber
+          });
+
+          // Extract state labels function
+          function extractStateLabels(labels) {
+            const stateData = {};
+            const statePrefix = 'state::';
+            
+            // Filter labels that start with 'state::'
+            const stateLabels = labels.filter(label => 
+              label.name.startsWith(statePrefix)
+            );
+            
+            // Process each state label
+            stateLabels.forEach(label => {
+              // Remove the 'state::' prefix
+              const labelValue = label.name.substring(statePrefix.length);
+              
+              // Split by '::' to get key-value pairs
+              const parts = labelValue.split('::');
+              
+              if (parts.length >= 2) {
+                const key = parts[0];
+                const value = parts.slice(1).join('::'); // Handle nested values
+                
+                // Convert numeric strings to numbers
+                const convertedValue = /^\d+$/.test(value) ? parseInt(value, 10) : value;
+                
+                stateData[key] = convertedValue;
+              }
+            });
+            
+            return stateData;
+          }
+
+          // Extract state data from issue labels
+          const stateData = extractStateLabels(issue.labels || []);
+
+          // Output as JSON for use in subsequent steps
+          core.setOutput('state', JSON.stringify(stateData));
+
+          // Log the extracted data for debugging
+          console.log('Extracted state data for output:', JSON.stringify(stateData, null, 2));
