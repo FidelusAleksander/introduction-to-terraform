@@ -24,7 +24,7 @@ jobs:
     steps:
       - name: Parse Issue
         id: parser
-        uses: issue-ops/parser@v4.2.0
+        uses: issue-ops/parser@v4
 
       - name: Output Issue JSON
         run: echo ${{ steps.parser.outputs.json }}
@@ -47,7 +47,7 @@ jobs:
     steps:
       - name: Add Labels
         id: add-labels
-        uses: issue-ops/labeler@v4.2.0
+        uses: issue-ops/labeler@v3
         with:
           action: add
           issue_number: ${{ needs.start_exercise.outputs.issue-number }}
