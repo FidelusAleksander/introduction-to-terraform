@@ -1,9 +1,9 @@
 name: Step 0 # Start Exercise
 
 on:
-  push:
-    branches:
-      - main
+  issues:
+    types: [opened]
+
 
 permissions:
   contents: write
@@ -14,14 +14,47 @@ env:
   STEP_1_FILE: ".github/steps/1-step.md"
 
 jobs:
+  check_issue:
+    if: contains(github.event.issue.title, 'configuration')
+    name: Check Issue Configuration
+    runs-on: ubuntu-latest
+    outputs:
+      configuration: ${{ steps.parser.outputs.json }}
+
+    steps:
+      - name: Parse Issue
+        id: parser
+        uses: issue-ops/parser@v4.2.0
+
+      - name: Output Issue JSON
+        run: echo ${{ steps.parser.outputs.json }}
+
   start_exercise:
     if: |
       !github.event.repository.is_template
     name: Start Exercise
+    needs: [check_issue]
     uses: skills/exercise-toolkit/.github/workflows/start-exercise.yml@v0.7.0
     with:
       exercise-title: "Introduction to Terraform"
       intro-message: "Learn Infrastructure as Code fundamentals with Terraform and the GitHub provider"
+
+  # this could be part of the start_exercise workflow, keeping separate for now as a poc
+  add_state_labels:
+    name: Add state labels
+    needs: [start_exercise, check_issue]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add Labels
+        id: add-labels
+        uses: issue-ops/labeler@v4.2.0
+        with:
+          action: add
+          issue_number: ${{ needs.start_exercise.outputs.issue-number }}
+          labels: |
+            state::tf_tool::${{ fromJson(needs.check_issue.outputs.configuration).tf_tool }}
+            state::difficulty::${{ fromJson(needs.check_issue.outputs.configuration).difficulty }}
+            state::language::${{ fromJson(needs.check_issue.outputs.configuration).language }}
 
   post_next_step_content:
     name: Post next step content

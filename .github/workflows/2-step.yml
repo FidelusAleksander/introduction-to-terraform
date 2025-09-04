@@ -114,12 +114,21 @@ jobs:
           vars: |
             next_step_number: 3
 
+      - name: Extract state labels
+        id: extract-state
+        uses: ./.github/actions/extract-state-labels
+        with:
+          issue-number: ${{ env.ISSUE_NUMBER }}
+          github-repository: ${{ env.ISSUE_REPOSITORY }}
+
       - name: Create comment - add step content
         uses: GrantBirki/comment@v2.1.1
         with:
           repository: ${{ env.ISSUE_REPOSITORY }}
           issue-number: ${{ env.ISSUE_NUMBER }}
           file: ${{ env.STEP_3_FILE }}
+          vars: |
+            tf_tool: ${{ fromJson(steps.extract-state.outputs.state).tf_tool }}
 
       - name: Create comment - watching for progress
         uses: GrantBirki/comment@v2.1.1

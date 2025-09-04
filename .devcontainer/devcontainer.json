@@ -3,7 +3,8 @@
 	"image": "mcr.microsoft.com/devcontainers/base:noble",
 	"features": {
 		"ghcr.io/devcontainers/features/github-cli:1": {},
-		"ghcr.io/devcontainers/features/terraform:1": {}
+		"ghcr.io/devcontainers/features/terraform:1": {},
+		"ghcr.io/robbert229/devcontainer-features/opentofu:1": {}
 	},
 	"containerEnv": {
 		"TF_VAR_repository_full_name": "${localEnv:GITHUB_REPOSITORY}"

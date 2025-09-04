@@ -1,0 +1,50 @@
+name: Exercise Setup
+description: Choose your preferred tool for the Introduction to Terraform exercise
+title: "[Setup] Exercise Configuration"
+labels: ["setup"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Welcome to the Introduction to Terraform Exercise!
+
+        Please select which tool you'd like to use for this exercise. Both tools are compatible and provide the same learning experience.
+
+  - type: dropdown
+    id: tf_tool
+    attributes:
+      label: Select your preferred tool
+      description: Choose one option below
+      options:
+        - terraform
+        - opentofu
+      default: 0
+    validations:
+      required: true
+
+  - type: dropdown
+    id: difficulty
+    attributes:
+      label: Select difficulty level
+      description: Choose your preferred difficulty level
+      options:
+        - beginner
+        - intermediate
+      default: 0
+    validations:
+      required: true
+
+  - type: dropdown
+    id: language
+    attributes:
+      label: Select your preferred language
+      description: Choose the language for exercise content
+      options:
+        - english
+        - portuguese
+        - spanish
+        - french
+        - japanese
+      default: 0
+    validations:
+      required: true
