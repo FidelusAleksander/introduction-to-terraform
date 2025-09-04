@@ -41,8 +41,8 @@ jobs:
           repository: ${{ github.repository }}
           issue-number: ${{ github.event.issue.number }}
           body: |
-            Hi @${{ github.actor }}! We're preparing your environment and will notify you here once it's ready.
-            
+            Hi @${{ github.actor }}! We're preparing your exercise and will notify you here once it's ready. Should be under a minute!
+
   start_exercise:
     if: |
       !github.event.repository.is_template
@@ -73,7 +73,7 @@ jobs:
   post_next_step_content:
     name: Post next step content
     runs-on: ubuntu-latest
-    needs: [start_exercise]
+    needs: [start_exercise, add_state_labels]
     env:
       ISSUE_NUMBER: ${{ needs.start_exercise.outputs.issue-number }}
       ISSUE_REPOSITORY: ${{ github.repository }}
