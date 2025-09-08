@@ -8,7 +8,9 @@ body:
       value: |
         ## Exercise Configuration
 
-        Configure your personalized learning experience by selecting your preferences below. Your choices will customize the exercise content.
+        Configure your personalized learning experience by selecting your preferences below. 
+
+        When you create the issue, Mona will pick it up and guide you forward!
 
   - type: dropdown
     id: tf_tool
