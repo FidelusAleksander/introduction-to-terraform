@@ -6,13 +6,13 @@
 
 {% if valid_tool == "opentofu" %}
 
-<!-- IMAGE_PLACEHOLDER: OpenTofu logo or diagram -->
+<img align="right" width="250px" src="https://www.vectorlogo.zone/logos/opentofu/opentofu-official.svg" />
 
 **[OpenTofu](https://opentofu.org/)** is an open-source Infrastructure as Code (IaC) tool that enables you to define and provision infrastructure using declarative configuration files. It's a community-driven fork of [Terraform](https://developer.hashicorp.com/terraform).
 
 {% else %}
 
-<!-- IMAGE_PLACEHOLDER: Terraform logo or diagram -->
+<img align="right" width="250px" src="https://upload.wikimedia.org/wikipedia/commons/0/04/Terraform_Logo.svg" />
 
 **[Terraform](https://developer.hashicorp.com/terraform)** is HashiCorp's Infrastructure as Code (IaC) tool that enables you to define and provision infrastructure using declarative configuration files.
 
