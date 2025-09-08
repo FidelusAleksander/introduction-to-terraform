@@ -59,8 +59,8 @@ jobs:
           add: "README.md"
           message: "Update README with exercise configuration link"
           default_author: github_actions
+
       - name: Enable next workflow
-      
         run: gh workflow enable "Step 0"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
