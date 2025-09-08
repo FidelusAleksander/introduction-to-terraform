@@ -4,7 +4,50 @@
 
 ## Step 1: Your First {{ tool_display }} Workflow
 
-Your team has set up a basic {{ tool_display }} configuration to manage repository labels. This is your first hands-on experience with Infrastructure as Code - you'll run the standard {{ tool_display }} workflow commands to see how code becomes infrastructure. The configuration is already prepared, so you can focus on understanding the process. 
+{% if valid_tool == "opentofu" %}
+
+<!-- IMAGE_PLACEHOLDER: OpenTofu logo or diagram -->
+
+**[OpenTofu](https://opentofu.org/)** is an open-source Infrastructure as Code (IaC) tool that enables you to define and provision infrastructure using declarative configuration files. It's a community-driven fork of [Terraform](https://developer.hashicorp.com/terraform).
+
+{% else %}
+
+<!-- IMAGE_PLACEHOLDER: Terraform logo or diagram -->
+
+**[Terraform](https://developer.hashicorp.com/terraform)** is HashiCorp's Infrastructure as Code (IaC) tool that enables you to define and provision infrastructure using declarative configuration files.
+
+{% endif %}
+
+Instead of manually creating resources through web consoles or scripts, you write configuration files that describe your desired infrastructure state, and Terraform handles the complexity of creating, updating, and managing those resources.
+
+```hcl
+resource "github_repository_ruleset" "example" {
+  name        = "example"
+  repository  = github_repository.example.name
+  target      = "branch"
+  enforcement = "active"
+
+  conditions {
+    ref_name {
+      include = ["~ALL"]
+      exclude = []
+    }
+  }
+
+  rules {
+    creation                = true
+    update                  = true
+    deletion                = true
+    required_linear_history = true
+    required_signatures     = false
+  }
+}
+```
+
+<!-- IMAGE_PLACEHOLDER: Example of tf code -->
+
+This repository contains a basic {{ tool_display }} configuration to manage GitHub labels. You will run the standard {{ tool_display }} workflow commands to see how code becomes infrastructure and see the effects on this repository!
+
 
 ### 📖 Theory: Understanding {{ tool_display }} Workflow
 
@@ -23,13 +66,11 @@ Learn more about [Terraform initialization](https://developer.hashicorp.com/terr
 
 ### ⌨️ Activity: Startup Development Environment
 
-
 1. Use the below button to open the **Create Codespace** page in a new tab. Use the default configuration.
 
    [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/{{full_repo_name}}?quickstart=1)
 
 1. Wait a moment for Visual Studio Code to fully load in your browser. This can take a minute or two.
-
 
 ### ⌨️ Activity: Run Your First {{ tool_display }} Workflow
 
