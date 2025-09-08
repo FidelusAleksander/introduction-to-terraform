@@ -4,7 +4,7 @@
 
 ## Step 1: Your First {{ tool_display }} Workflow
 
-Your team has set up a basic {{ tool_display }} configuration to manage repository labels. This is your first hands-on experience with Infrastructure as Code - you'll run the standard {{ tool_display }} workflow commands to see how code becomes infrastructure. The configuration is already prepared, so you can focus on understanding the process.
+Your team has set up a basic {{ tool_display }} configuration to manage repository labels. This is your first hands-on experience with Infrastructure as Code - you'll run the standard {{ tool_display }} workflow commands to see how code becomes infrastructure. The configuration is already prepared, so you can focus on understanding the process. 
 
 ### 📖 Theory: Understanding {{ tool_display }} Workflow
 
@@ -23,16 +23,23 @@ Learn more about [Terraform initialization](https://developer.hashicorp.com/terr
 
 ### ⌨️ Activity: Startup Development Environment
 
-1. Start your codespace and explore the workspace
-1. Examine the pre-configured `main.tf` file structure
-1. Review the {{ tool_display }} configuration syntax and understand what each section does
-1. Familiarize yourself with the GitHub provider and issue label resource
+
+1. Use the below button to open the **Create Codespace** page in a new tab. Use the default configuration.
+
+   [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/{{full_repo_name}}?quickstart=1)
+
+1. Wait a moment for Visual Studio Code to fully load in your browser. This can take a minute or two.
+
 
 ### ⌨️ Activity: Run Your First {{ tool_display }} Workflow
 
+1. Examine the pre-configured `main.tf` file structure
+   1. Review the {{ tool_display }} configuration syntax and understand what each section does
+   1. Familiarize yourself with the GitHub provider and issue label resource
 1. Run `{{ tool_cmd }} init` to initialize the configuration
 1. Run `{{ tool_cmd }} plan` to see what will be created
-1. Run `{{ tool_cmd }} apply` to create the repository label
+1. Run `{{ tool_cmd }} apply` to create the repository label.
+   1. You will be asked to confirm the resource creation. Type `yes` when prompted.
 1. Verify the label was created in your repository
 
 <details>
