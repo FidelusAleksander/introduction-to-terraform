@@ -6,21 +6,25 @@
 
 ### 📖 Theory: What are {{ tool_display }} Providers?
 
-**What are providers?**
+**How Providers Work:**
 
-Providers are plugins that {{ tool_display }} uses to interact with APIs of cloud platforms, SaaS services, and other infrastructure platforms. They act as a translation layer between {{ tool_display }}'s declarative configuration language and the specific APIs of services like GitHub, AWS, Google Cloud, and many others.
+Providers act as a bridge between {{ tool_display }} and external APIs like GitHub, AWS, Google Cloud, and many others. They handle the complexity of different API formats so you can use a consistent configuration language.
 
-- **Resource Management**: Each provider defines resource types (like `github_issue_label` or `github_branch_protection`) that you can declare in your configuration
-- **State Tracking**: Providers help {{ tool_display }} track the current state of your infrastructure and detect drift from your desired configuration
-- **Automatic Installation**: {{ tool_display }} automatically downloads providers from the {{ tool_display }} Registry during `{{ tool_cmd }} init`
+**Key Benefits:**
 
-**GitHub Provider Authentication**
+- **Resource Management** - Define infrastructure using resource types like `github_issue_label` or `github_branch_protection`
+- **State Tracking** - Monitor infrastructure changes and detect drift from your desired configuration
+- **Automatic Installation** - Downloaded during `{{ tool_cmd }} init` from the {{ tool_display }} Registry
+
+**🔐 GitHub Provider Authentication:**
 
 There are [multiple ways](https://registry.terraform.io/providers/integrations/github/latest/docs#authentication) to allow the GitHub provider to authenticate with GitHub API.
 
 In the first step you've implicitly used the `GITHUB_TOKEN` environment variable that is readily available in your Codespace environment.
 
-However, the default Codespace `GITHUB_TOKEN` has limited read-only permissions and cannot create or modify repository settings like branch protection rules. For infrastructure management, you will likely need a token with broader permissions.
+The default Codespace `GITHUB_TOKEN` has very limited permissions. For infrastructure management, you will likely need a token with broader permissions. 
+
+
 
 ### ⌨️ Activity: Add Branch Protection Configuration
 
