@@ -8,9 +8,8 @@ Here's a recap of your accomplishments:
 
 - Understanding the Terraform workflow: init, plan, apply
 - Adding new resources to expand infrastructure management
-- Recognizing and handling existing resource conflicts
-- Importing existing resources into Terraform management
 - Managing GitHub repository settings as code
+- Setup different ways of authentication with GitHub
 
 ### What's next?
 
