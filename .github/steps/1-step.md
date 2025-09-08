@@ -20,6 +20,8 @@
 
 Instead of manually creating resources through web consoles or scripts, you write configuration files that describe your desired infrastructure state, and Terraform handles the complexity of creating, updating, and managing those resources.
 
+Here is an example of creating a GitHub Repository Ruleset:
+
 ```hcl
 resource "github_repository_ruleset" "example" {
   name        = "example"
@@ -44,10 +46,7 @@ resource "github_repository_ruleset" "example" {
 }
 ```
 
-<!-- IMAGE_PLACEHOLDER: Example of tf code -->
-
 This repository contains a basic {{ tool_display }} configuration to manage GitHub labels. You will run the standard {{ tool_display }} workflow commands to see how code becomes infrastructure and see the effects on this repository!
-
 
 ### 📖 Theory: Understanding {{ tool_display }} Workflow
 
@@ -59,9 +58,17 @@ The {{ tool_display }} workflow follows a predictable pattern: initialize, plan,
 - {{ tool_display }} manages state to track what resources it controls
 
 {% if valid_tool == "opentofu" %}
-Learn more about [OpenTofu initialization](https://opentofu.org/docs/cli/commands/init/), [planning changes](https://opentofu.org/docs/cli/commands/plan/), [applying configurations](https://opentofu.org/docs/cli/commands/apply/), [GitHub provider](https://registry.terraform.io/providers/integrations/github/latest/docs), and [issue label resources](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/issue_label).
+> [!TIP]
+> **Learn more:**
+>
+> - [OpenTofu commands](https://opentofu.org/docs/cli/commands/)
+> - [GitHub provider](https://registry.terraform.io/providers/integrations/github/latest/docs)
 {% else %}
-Learn more about [Terraform initialization](https://developer.hashicorp.com/terraform/tutorials/cli/init), [planning changes](https://developer.hashicorp.com/terraform/tutorials/cli/plan), [applying configurations](https://developer.hashicorp.com/terraform/tutorials/cli/apply), [GitHub provider](https://registry.terraform.io/providers/integrations/github/latest/docs), and [issue label resources](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/issue_label).
+> [!TIP]
+> **Learn more:**
+>
+> - [Terraform commands](https://developer.hashicorp.com/terraform/cli/commands)
+> - [GitHub provider](https://registry.terraform.io/providers/integrations/github/latest/docs)
 {% endif %}
 
 ### ⌨️ Activity: Startup Development Environment
