@@ -35,13 +35,17 @@ jobs:
       - name: Echo all outputs 
         run: echo ${{ steps.parser.outputs }}
 
+      - name: Checkout for templates
+        uses: actions/checkout@v5
+
       - name: Mention the issue is being prepared
         uses: GrantBirki/comment@v2.1.1
         with:
           repository: ${{ github.repository }}
           issue-number: ${{ github.event.issue.number }}
-          body: |
-            Hi @${{ github.actor }}! We're preparing your exercise and will notify you here once it's ready. Should be under a minute!
+          file: .github/markdown-templates/step-feedback/preparing-exercise.md
+          vars: |
+            login: ${{ github.actor }}
 
   start_exercise:
     if: |
