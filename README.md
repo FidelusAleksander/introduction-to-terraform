@@ -1,26 +1,25 @@
 # Introduction to Terraform
 
-_Learn the fundamentals of Terraform by managing GitHub repository settings as Infrastructure as Code._
+_Learn Infrastructure as Code fundamentals with Terraform or OpenTofu by managing GitHub repository settings._
 
 ## Welcome
 
 - **Who is this for**: Developers and DevOps engineers new to Infrastructure as Code concepts
-- **What you'll learn**: Terraform workflow fundamentals, GitHub provider usage, and infrastructure import strategies
-- **What you'll build**: Terraform configuration to manage GitHub repository settings including labels, branch protection, and existing resource imports
+- **What you'll learn**: Infrastructure as Code workflow fundamentals, provider authentication, and GitHub provider usage
+- **What you'll build**: Configuration to manage GitHub repository settings including labels and branch protection rules
 - **Prerequisites**:
 
   - Basic understanding of Git and GitHub
   - Familiarity with command-line interfaces
-  - No prior Terraform knowledge required
+  - No prior Terraform or OpenTofu knowledge required
 
 - **How long**: This exercise takes less than 30 minutes to complete.
 
 In this exercise, you will:
 
-1. Introduction to Terraform workflow by adding a repository label
-1. Create branch protection rules using Terraform
-1. Attempt to add repository configuration and encounter existing resource conflicts
-1. Learn to import existing GitHub resources into Terraform state
+1. Run your first Terraform/OpenTofu workflow
+1. Understand what providers are and how to use them
+1. Learn how to manage your GitHub repository settings management as code
 
 ### How to start this exercise
 
