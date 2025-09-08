@@ -47,6 +47,7 @@ jobs:
           template-file: .github/markdown-templates/readme/configure-exercise.md
           template-vars: |
             title: "Introduction to Terraform"
+            login: ${{ github.actor }}
 
       - name: Overwrite README
         env:
