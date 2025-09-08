@@ -39,6 +39,13 @@ jobs:
           path: exercise-toolkit
           ref: v0.7.0
 
+      - name: Extract state labels
+        id: extract-state
+        uses: ./.github/actions/extract-state-labels
+        with:
+          issue-number: ${{ env.ISSUE_NUMBER }}
+          github-repository: ${{ env.ISSUE_REPOSITORY }}
+
       - name: Create comment - step finished - final review next
         uses: GrantBirki/comment@v2.1.1
         with:
@@ -52,6 +59,8 @@ jobs:
           repository: ${{ env.ISSUE_REPOSITORY }}
           issue-number: ${{ env.ISSUE_NUMBER }}
           file: ${{ env.REVIEW_FILE }}
+          vars: |
+            tf_tool: ${{ fromJson(steps.extract-state.outputs.state).tf_tool }}
 
       - name: Disable current workflow
         run: gh workflow disable "${{github.workflow}}"

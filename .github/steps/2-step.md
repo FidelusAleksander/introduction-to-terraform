@@ -4,7 +4,7 @@
 
 ## Step 2: {{ tool_display }} providers
 
-### 📖 Theory: What are Terraform Providers?
+### 📖 Theory: What are {{ tool_display }} Providers?
 
 **What are providers?**
 
@@ -16,7 +16,7 @@ Providers are plugins that {{ tool_display }} uses to interact with APIs of clou
 
 **GitHub Provider Authentication**
 
-There are [multiple ways](https://registry.terraform.io/providers/integrations/github/latest/docs#authentication) to allow the GitHub provider to authenticate with GitHub API. 
+There are [multiple ways](https://registry.terraform.io/providers/integrations/github/latest/docs#authentication) to allow the GitHub provider to authenticate with GitHub API.
 
 In the first step you've implicitly used the `GITHUB_TOKEN` environment variable that is readily available in your Codespace environment.
 
@@ -42,7 +42,7 @@ Let's try adding a resource that requires broader permissions. Such as a branch 
 1. Run `{{ tool_cmd }} apply` to try creating the branch protection rule
 1. Notice the insufficient permissions. Let's solve that!
 
-### ⌨️ Activity: Setup GitHub Credentials
+### ⌨️ Activity: Setup GitHub Authentication for Repository Management
 
 Managing GitHub Repository settings required broader permissions, let's authenticate using GitHub CLI.
 
