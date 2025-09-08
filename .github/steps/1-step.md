@@ -4,7 +4,49 @@
 
 ## Step 1: Your First {{ tool_display }} Workflow
 
-Your team has set up a basic {{ tool_display }} configuration to manage repository labels. This is your first hands-on experience with Infrastructure as Code - you'll run the standard {{ tool_display }} workflow commands to see how code becomes infrastructure. The configuration is already prepared, so you can focus on understanding the process.
+{% if valid_tool == "opentofu" %}
+
+<img align="right" width="250px" src="https://www.vectorlogo.zone/logos/opentofu/opentofu-official.svg" />
+
+**[OpenTofu](https://opentofu.org/)** is an open-source Infrastructure as Code (IaC) tool that enables you to define and provision infrastructure using declarative configuration files. It's a community-driven fork of [Terraform](https://developer.hashicorp.com/terraform).
+
+{% else %}
+
+<img align="right" width="250px" src="https://upload.wikimedia.org/wikipedia/commons/0/04/Terraform_Logo.svg" />
+
+**[Terraform](https://developer.hashicorp.com/terraform)** is HashiCorp's Infrastructure as Code (IaC) tool that enables you to define and provision infrastructure using declarative configuration files.
+
+{% endif %}
+
+Instead of manually creating resources through web consoles or scripts, you write configuration files that describe your desired infrastructure state, and Terraform handles the complexity of creating, updating, and managing those resources.
+
+Here is an example of creating a GitHub Repository Ruleset:
+
+```hcl
+resource "github_repository_ruleset" "example" {
+  name        = "example"
+  repository  = github_repository.example.name
+  target      = "branch"
+  enforcement = "active"
+
+  conditions {
+    ref_name {
+      include = ["~ALL"]
+      exclude = []
+    }
+  }
+
+  rules {
+    creation                = true
+    update                  = true
+    deletion                = true
+    required_linear_history = true
+    required_signatures     = false
+  }
+}
+```
+
+This repository contains a basic {{ tool_display }} configuration to manage GitHub labels. You will run the standard {{ tool_display }} workflow commands to see how code becomes infrastructure and see the effects on this repository!
 
 ### 📖 Theory: Understanding {{ tool_display }} Workflow
 
@@ -16,23 +58,36 @@ The {{ tool_display }} workflow follows a predictable pattern: initialize, plan,
 - {{ tool_display }} manages state to track what resources it controls
 
 {% if valid_tool == "opentofu" %}
-Learn more about [OpenTofu initialization](https://opentofu.org/docs/cli/commands/init/), [planning changes](https://opentofu.org/docs/cli/commands/plan/), [applying configurations](https://opentofu.org/docs/cli/commands/apply/), [GitHub provider](https://registry.terraform.io/providers/integrations/github/latest/docs), and [issue label resources](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/issue_label).
+> [!TIP]
+> **Learn more:**
+>
+> - [OpenTofu commands](https://opentofu.org/docs/cli/commands/)
+> - [GitHub provider](https://registry.terraform.io/providers/integrations/github/latest/docs)
 {% else %}
-Learn more about [Terraform initialization](https://developer.hashicorp.com/terraform/tutorials/cli/init), [planning changes](https://developer.hashicorp.com/terraform/tutorials/cli/plan), [applying configurations](https://developer.hashicorp.com/terraform/tutorials/cli/apply), [GitHub provider](https://registry.terraform.io/providers/integrations/github/latest/docs), and [issue label resources](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/issue_label).
+> [!TIP]
+> **Learn more:**
+>
+> - [Terraform commands](https://developer.hashicorp.com/terraform/cli/commands)
+> - [GitHub provider](https://registry.terraform.io/providers/integrations/github/latest/docs)
 {% endif %}
 
 ### ⌨️ Activity: Startup Development Environment
 
-1. Start your codespace and explore the workspace
-1. Examine the pre-configured `main.tf` file structure
-1. Review the {{ tool_display }} configuration syntax and understand what each section does
-1. Familiarize yourself with the GitHub provider and issue label resource
+1. Use the below button to open the **Create Codespace** page in a new tab. Use the default configuration.
+
+   [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/{{full_repo_name}}?quickstart=1)
+
+1. Wait a moment for Visual Studio Code to fully load in your browser. This can take a minute or two.
 
 ### ⌨️ Activity: Run Your First {{ tool_display }} Workflow
 
+1. Examine the pre-configured `main.tf` file structure
+   1. Review the {{ tool_display }} configuration syntax and understand what each section does
+   1. Familiarize yourself with the GitHub provider and issue label resource
 1. Run `{{ tool_cmd }} init` to initialize the configuration
 1. Run `{{ tool_cmd }} plan` to see what will be created
-1. Run `{{ tool_cmd }} apply` to create the repository label
+1. Run `{{ tool_cmd }} apply` to create the repository label.
+   1. You will be asked to confirm the resource creation. Type `yes` when prompted.
 1. Verify the label was created in your repository
 
 <details>
