@@ -27,8 +27,8 @@ jobs:
         id: extract-state
         uses: ./.github/actions/extract-state-labels
         with:
-          issue-number: ${{ env.ISSUE_NUMBER }}
-          github-repository: ${{ env.ISSUE_REPOSITORY }}
+          issue-number: ${{ github.event.issue.number }}
+          github-repository: ${{ github.repository }}
 
       - uses: github/command@v2.0.1
         id: hint-command
