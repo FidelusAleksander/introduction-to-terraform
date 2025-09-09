@@ -29,12 +29,6 @@ jobs:
         with:
           issue-form-template: exercise-setup.yml
 
-      - name: Echo json output
-        run: echo ${{ steps.parser.outputs.json }}
-
-      - name: Echo all outputs 
-        run: echo ${{ steps.parser.outputs }}
-
       - name: Checkout for templates
         uses: actions/checkout@v5
 
