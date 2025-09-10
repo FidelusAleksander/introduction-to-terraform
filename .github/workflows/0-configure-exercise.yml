@@ -37,7 +37,7 @@ jobs:
   update_readme:
     name: Update README
     runs-on: ubuntu-latest
-
+    needs: disable_workflows
     steps:
       - uses: actions/checkout@v5
       - name: Build welcome message from template
