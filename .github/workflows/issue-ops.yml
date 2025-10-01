@@ -25,8 +25,9 @@ jobs:
 
       - name: Extract state labels
         id: extract-state
-        uses: ./.github/actions/extract-state-labels
+        uses: FidelusAleksander/state-labels@v1
         with:
+          operation: get-all
           issue-number: ${{ github.event.issue.number }}
           github-repository: ${{ github.repository }}
 
