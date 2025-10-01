@@ -30,7 +30,7 @@ jobs:
           operation: get
           key: difficulty
           issue-number: ${{ github.event.issue.number }}
-          github-repository: ${{ github.repository }}
+          repository: ${{ github.repository }}
 
       - uses: github/command@v2.0.1
         id: hint-command
