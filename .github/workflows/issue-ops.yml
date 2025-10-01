@@ -73,21 +73,15 @@ jobs:
             echo "valid=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: Remove old difficulty label
+      - name: Set new difficulty level
         if: ${{ steps.difficulty-command.outputs.continue == 'true' && steps.parse-difficulty.outputs.valid == 'true' }}
-        uses: issue-ops/labeler@v3
+        uses: FidelusAleksander/state-labels@v1
         with:
-          action: remove
-          issue_number: ${{ github.event.issue.number }}
-          labels: state::difficulty::${{ steps.difficulty.outputs.value }}
-
-      - name: Add new difficulty label
-        if: ${{ steps.difficulty-command.outputs.continue == 'true' && steps.parse-difficulty.outputs.valid == 'true' }}
-        uses: issue-ops/labeler@v3
-        with:
-          action: add
-          issue_number: ${{ github.event.issue.number }}
-          labels: state::difficulty::${{ steps.parse-difficulty.outputs.new_difficulty }}
+          operation: set
+          key: difficulty
+          value: ${{ steps.parse-difficulty.outputs.new_difficulty }}
+          issue-number: ${{ github.event.issue.number }}
+          github-repository: ${{ github.repository }}
 
       - name: Comment on successful difficulty change
         if: ${{ steps.difficulty-command.outputs.continue == 'true' && steps.parse-difficulty.outputs.valid == 'true' }}
