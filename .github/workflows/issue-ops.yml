@@ -59,32 +59,33 @@ jobs:
           command: ".difficulty"
           allowed_contexts: issue
           reaction: "eyes"
+          param_separator: " "
 
-      - name: Parse difficulty level
+      - name: Validate difficulty level
         if: ${{ steps.difficulty-command.outputs.continue == 'true' }}
-        id: parse-difficulty
+        id: validate-difficulty
         run: |
-          # Extract the difficulty level from the command arguments
-          ARGS="${{ steps.difficulty-command.outputs.command_arguments }}"
-          if [[ "$ARGS" == "beginner" ]] || [[ "$ARGS" == "intermediate" ]]; then
-            echo "new_difficulty=$ARGS" >> $GITHUB_OUTPUT
+          # Get the difficulty level from params output
+          DIFFICULTY="${{ steps.difficulty-command.outputs.params }}"
+          if [[ "$DIFFICULTY" == "beginner" ]] || [[ "$DIFFICULTY" == "intermediate" ]]; then
+            echo "new_difficulty=$DIFFICULTY" >> $GITHUB_OUTPUT
             echo "valid=true" >> $GITHUB_OUTPUT
           else
             echo "valid=false" >> $GITHUB_OUTPUT
           fi
 
       - name: Set new difficulty level
-        if: ${{ steps.difficulty-command.outputs.continue == 'true' && steps.parse-difficulty.outputs.valid == 'true' }}
+        if: ${{ steps.difficulty-command.outputs.continue == 'true' && steps.validate-difficulty.outputs.valid == 'true' }}
         uses: FidelusAleksander/state-labels@v1
         with:
           operation: set
           key: difficulty
-          value: ${{ steps.parse-difficulty.outputs.new_difficulty }}
+          value: ${{ steps.validate-difficulty.outputs.new_difficulty }}
           issue-number: ${{ github.event.issue.number }}
           github-repository: ${{ github.repository }}
 
       - name: Comment on successful difficulty change
-        if: ${{ steps.difficulty-command.outputs.continue == 'true' && steps.parse-difficulty.outputs.valid == 'true' }}
+        if: ${{ steps.difficulty-command.outputs.continue == 'true' && steps.validate-difficulty.outputs.valid == 'true' }}
         uses: GrantBirki/comment@v2.1.1
         with:
           issue-number: ${{ github.event.issue.number }}
@@ -92,12 +93,12 @@ jobs:
             ✅ **Difficulty level changed successfully!**
             
             - Previous difficulty: `${{ steps.difficulty.outputs.value }}`
-            - New difficulty: `${{ steps.parse-difficulty.outputs.new_difficulty }}`
+            - New difficulty: `${{ steps.validate-difficulty.outputs.new_difficulty }}`
             
-            ${{ steps.parse-difficulty.outputs.new_difficulty == 'beginner' && 'You can now use `.hint` commands to get help with the exercises! 💡' || 'You have chosen the intermediate difficulty. Hints are not available at this level, but you can always change back to beginner if needed. 💪' }}
+            ${{ steps.validate-difficulty.outputs.new_difficulty == 'beginner' && 'You can now use `.hint` commands to get help with the exercises! 💡' || 'You have chosen the intermediate difficulty. Hints are not available at this level, but you can always change back to beginner if needed. 💪' }}
 
       - name: Comment on invalid difficulty command
-        if: ${{ steps.difficulty-command.outputs.continue == 'true' && steps.parse-difficulty.outputs.valid == 'false' }}
+        if: ${{ steps.difficulty-command.outputs.continue == 'true' && steps.validate-difficulty.outputs.valid == 'false' }}
         uses: GrantBirki/comment@v2.1.1
         with:
           issue-number: ${{ github.event.issue.number }}
