@@ -45,7 +45,7 @@ jobs:
         with:
           operation: get-all
           issue-number: ${{ env.ISSUE_NUMBER }}
-          github-repository: ${{ env.ISSUE_REPOSITORY }}
+          repository: ${{ env.ISSUE_REPOSITORY }}
 
       - name: Create comment - step finished - final review next
         uses: GrantBirki/comment@v2.1.1
