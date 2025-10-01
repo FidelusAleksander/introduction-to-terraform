@@ -24,10 +24,11 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Extract state labels
-        id: extract-state
+        id: difficulty
         uses: FidelusAleksander/state-labels@v1
         with:
-          operation: get-all
+          operation: get
+          key: difficulty
           issue-number: ${{ github.event.issue.number }}
           github-repository: ${{ github.repository }}
 
@@ -39,14 +40,14 @@ jobs:
           reaction: "eyes"
 
       - name: Comment with hint
-        if: ${{ steps.hint-command.outputs.continue == 'true' && fromJson(steps.extract-state.outputs.state).difficulty == 'beginner' }}
+        if: ${{ steps.hint-command.outputs.continue == 'true' && steps.difficulty.outputs.value == 'beginner' }}
         uses: GrantBirki/comment@v2.1.1
         with:
           issue-number: ${{ github.event.issue.number }}
           file: .github/hints/${{ steps.step-info.outputs.current-step }}.md
 
       - name: Comment if not beginner
-        if: ${{ steps.hint-command.outputs.continue == 'true' && fromJson(steps.extract-state.outputs.state).difficulty != 'beginner' }}
+        if: ${{ steps.hint-command.outputs.continue == 'true' && steps.difficulty.outputs.value != 'beginner' }}
         uses: GrantBirki/comment@v2.1.1
         with:
           issue-number: ${{ github.event.issue.number }}
